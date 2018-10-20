@@ -1,18 +1,22 @@
-from password import password
-from character import character
+from gpiozero import LED, Button
+from time import sleep
+from gpiozero import MCP3008
 
-class twiddle_lock:
-    """ dialed lock """
+pot = MCP3008(channel=0)
 
-c1=character('A', 3)
-c2=character('C', 3)
+while True:
+    	print(pot.value)
+	sleep(0.5)
 
-p1=password([])
-p2=password([])
+u_line = LED(23)
+l_line = LED(22)
+s_line = Button(17)
+m_line = Button(27) 
 
-p1.add_character(c1)
-p2.add_character(c2)
+while True:
+	s_line.wait_for_press()
+	print("s was pressed")
 
-print(p1.to_string())
-print(p2.to_string())
-print(p1.validate_unsecure(p2))
+	m_line.wait_for_press()
+	print("m was pressed")
+	sleep(0.5)
